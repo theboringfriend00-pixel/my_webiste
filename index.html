@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The HR Desk — Remote HR Operations for Growing Businesses</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #F8F4EF;
+    --bg-alt: #F1E7DD;
+    --panel: #FFFDFB;
+    --ink: #2B2230;
+    --ink-soft: #6B5D6C;
+    --rose: #C98A94;
+    --rose-deep: #A85F6E;
+    --sage: #7C8B6F;
+    --sage-deep: #5F6E54;
+    --line: #DDD0C2;
+    --gold: #B99356;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    margin:0;
+    color:var(--ink);
+    letter-spacing:-0.01em;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--rose-deep);
+  }
+  a{color:inherit;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 32px;}
+  img{max-width:100%;display:block;}
+
+  /* stitched thread divider — the signature element */
+  .stitch{
+    width:100%;
+    height:14px;
+    background-image: radial-gradient(circle, var(--rose) 1.6px, transparent 1.8px);
+    background-size: 16px 14px;
+    background-position: 0 center;
+    opacity:0.55;
+  }
+  .stitch.sage{ background-image: radial-gradient(circle, var(--sage) 1.6px, transparent 1.8px); }
+
+  /* NAV */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(248,244,239,0.9);
+    backdrop-filter: blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-top:18px; padding-bottom:18px;
+  }
+  .logo{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Fraunces', serif; font-size:1.2rem; font-weight:600;
+  }
+  .logo-mark{
+    width:30px;height:30px;flex-shrink:0;
+  }
+  .navlinks{display:flex; gap:34px; font-size:0.92rem; font-weight:500;}
+  .navlinks a{text-decoration:none; color:var(--ink-soft); transition:color .2s;}
+  .navlinks a:hover{color:var(--rose-deep);}
+  .nav-cta{
+    background:var(--ink); color:var(--bg);
+    padding:10px 20px; border-radius:100px;
+    font-size:0.88rem; font-weight:500; text-decoration:none;
+    white-space:nowrap;
+  }
+  @media (max-width:840px){ .navlinks{display:none;} }
+
+  /* HERO */
+  .hero{ padding:88px 0 64px; }
+  .hero .wrap{ display:grid; grid-template-columns:1.15fr 0.85fr; gap:56px; align-items:center; }
+  .hero h1{ font-size:3.4rem; line-height:1.06; margin:18px 0 22px; }
+  .hero h1 em{ font-style:italic; color:var(--rose-deep); }
+  .hero p.lede{ font-size:1.12rem; color:var(--ink-soft); max-width:480px; margin-bottom:30px; }
+  .btn-row{ display:flex; gap:16px; align-items:center; flex-wrap:wrap; }
+  .btn-primary{
+    background:var(--rose-deep); color:#fff; text-decoration:none;
+    padding:14px 26px; border-radius:100px; font-weight:500; font-size:0.95rem;
+    box-shadow:0 8px 20px -8px rgba(168,95,110,0.55);
+  }
+  .btn-ghost{
+    text-decoration:none; color:var(--ink); font-weight:500; font-size:0.95rem;
+    border-bottom:1px solid var(--ink); padding-bottom:2px;
+  }
+  .hero-panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:22px;
+    padding:30px;
+    position:relative;
+  }
+  .hero-panel .tag{
+    font-family:'IBM Plex Mono',monospace; font-size:0.7rem; letter-spacing:0.08em;
+    color:var(--ink-soft); text-transform:uppercase; margin-bottom:14px; display:block;
+  }
+  .stat-row{ display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px dashed var(--line); }
+  .stat-row:last-child{ border-bottom:none; }
+  .stat-row .label{ font-size:0.9rem; color:var(--ink-soft); }
+  .stat-row .value{ font-family:'Fraunces', serif; font-size:1.15rem; }
+
+  /* TRUST STRIP */
+  .trust{ padding:20px 0 40px; }
+  .trust .wrap{
+    display:flex; gap:40px; flex-wrap:wrap; justify-content:space-between;
+    color:var(--ink-soft); font-size:0.84rem; font-family:'IBM Plex Mono', monospace;
+    letter-spacing:0.02em;
+  }
+
+  /* SECTION generic */
+  section{ padding:80px 0; }
+  .section-alt{ background:var(--bg-alt); }
+  .section-head{ max-width:620px; margin-bottom:52px; }
+  .section-head h2{ font-size:2.2rem; margin-top:12px; }
+  .section-head p{ color:var(--ink-soft); margin-top:14px; font-size:1.02rem; }
+
+  /* SERVICES */
+  .services-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
+  }
+  .service-card{
+    background:var(--panel); border:1px solid var(--line); border-radius:18px;
+    padding:30px 26px; transition:transform .2s, border-color .2s;
+  }
+  .service-card:hover{ transform:translateY(-4px); border-color:var(--rose); }
+  .service-num{
+    font-family:'IBM Plex Mono',monospace; font-size:0.75rem; color:var(--rose-deep);
+    margin-bottom:16px; display:block;
+  }
+  .service-card h3{ font-size:1.18rem; margin-bottom:10px; }
+  .service-card p{ color:var(--ink-soft); font-size:0.94rem; margin:0; }
+  @media (max-width:900px){ .services-grid{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:600px){ .services-grid{ grid-template-columns:1fr; } }
+
+  /* PROCESS */
+  .process-list{ display:flex; flex-direction:column; }
+  .process-item{
+    display:grid; grid-template-columns:80px 1fr; gap:24px;
+    padding:26px 0; border-bottom:1px solid var(--line);
+  }
+  .process-item:first-child{ border-top:1px solid var(--line); }
+  .process-item .p-num{ font-family:'Fraunces', serif; font-style:italic; font-size:1.6rem; color:var(--sage-deep); }
+  .process-item h3{ font-size:1.1rem; margin-bottom:6px; }
+  .process-item p{ color:var(--ink-soft); margin:0; font-size:0.95rem; max-width:560px; }
+
+  /* PRICING */
+  .pricing-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .price-card{
+    background:var(--panel); border:1px solid var(--line); border-radius:20px;
+    padding:32px 28px; display:flex; flex-direction:column;
+  }
+  .price-card.featured{
+    border:1.5px solid var(--rose-deep);
+    box-shadow:0 20px 40px -20px rgba(168,95,110,0.35);
+    position:relative;
+  }
+  .price-card.featured::before{
+    content:"Most chosen by SMEs";
+    position:absolute; top:-13px; left:28px;
+    background:var(--rose-deep); color:#fff;
+    font-size:0.68rem; font-family:'IBM Plex Mono',monospace;
+    padding:5px 12px; border-radius:100px; letter-spacing:0.04em;
+  }
+  .price-card h3{ font-size:1.15rem; margin-bottom:6px; }
+  .price-card .price-tag{ font-family:'Fraunces', serif; font-size:2.1rem; margin:14px 0 4px; }
+  .price-card .price-tag span{ font-family:'Work Sans',sans-serif; font-size:0.85rem; color:var(--ink-soft); font-weight:500; }
+  .price-card .price-sub{ font-size:0.85rem; color:var(--ink-soft); margin-bottom:22px; }
+  .price-card ul{ list-style:none; padding:0; margin:0 0 26px; flex-grow:1; }
+  .price-card li{
+    font-size:0.9rem; padding:9px 0; border-top:1px dashed var(--line);
+    display:flex; gap:10px; color:var(--ink-soft);
+  }
+  .price-card li:first-child{ border-top:none; }
+  .price-card li::before{ content:"—"; color:var(--rose-deep); flex-shrink:0; }
+  .price-cta{
+    text-align:center; text-decoration:none; padding:12px; border-radius:100px;
+    font-weight:500; font-size:0.92rem; border:1px solid var(--ink);
+  }
+  .price-card.featured .price-cta{ background:var(--ink); color:#fff; border-color:var(--ink); }
+  @media (max-width:920px){ .pricing-grid{ grid-template-columns:1fr; } .price-card.featured{order:-1;} }
+
+  .addon-note{
+    margin-top:34px; font-size:0.9rem; color:var(--ink-soft);
+    background:var(--panel); border:1px solid var(--line); border-radius:14px;
+    padding:18px 22px;
+  }
+
+  /* TESTIMONIAL */
+  .testimonial{
+    background:var(--ink); color:var(--bg);
+    border-radius:26px; padding:56px 48px;
+    display:grid; grid-template-columns:auto 1fr; gap:36px; align-items:center;
+  }
+  .testimonial blockquote{
+    font-family:'Fraunces', serif; font-style:italic; font-size:1.5rem;
+    line-height:1.4; margin:0 0 18px;
+  }
+  .testimonial cite{ font-style:normal; font-size:0.88rem; opacity:0.7; }
+  .quote-mark{ font-family:'Fraunces',serif; font-size:5rem; color:var(--rose); line-height:0.6; }
+  @media (max-width:700px){ .testimonial{ grid-template-columns:1fr; padding:40px 28px;} .quote-mark{display:none;} }
+
+  /* CTA / FOOTER */
+  .cta-band{ text-align:center; padding:90px 0 70px; }
+  .cta-band h2{ font-size:2.4rem; max-width:640px; margin:0 auto 22px; }
+  .cta-band p{ color:var(--ink-soft); max-width:460px; margin:0 auto 32px; }
+
+  footer{ background:var(--ink); color:var(--bg); padding:56px 0 30px; }
+  .foot-grid{
+    display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:32px; padding-bottom:40px;
+    border-bottom:1px solid rgba(248,244,239,0.15);
+  }
+  footer h4{ font-size:0.78rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--rose); margin-bottom:16px; font-weight:600; }
+  footer .foot-brand{ font-family:'Fraunces', serif; font-size:1.25rem; margin-bottom:12px; }
+  footer p{ color:rgba(248,244,239,0.65); font-size:0.9rem; margin:0; }
+  footer ul{ list-style:none; padding:0; margin:0; }
+  footer li{ margin-bottom:10px; font-size:0.9rem; color:rgba(248,244,239,0.75); }
+  .foot-bottom{
+    display:flex; justify-content:space-between; padding-top:24px;
+    font-size:0.8rem; color:rgba(248,244,239,0.5); flex-wrap:wrap; gap:10px;
+  }
+  @media (max-width:820px){ .foot-grid{ grid-template-columns:1fr 1fr; } }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="logo">
+      <svg class="logo-mark" viewBox="0 0 30 30" fill="none">
+        <circle cx="15" cy="15" r="13" stroke="#A85F6E" stroke-width="1.4"/>
+        <path d="M8 15c2-4 5-4 7 0s5 4 7 0" stroke="#7C8B6F" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+      The HR Desk
+    </div>
+    <div class="navlinks">
+      <a href="#services">Services</a>
+      <a href="#process">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="nav-cta" href="#contact">Book a free HR check-in</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Remote HR Partner for Small &amp; Growing Businesses</span>
+      <h1>We stitch the <em>people side</em><br> of your business together.</h1>
+      <p class="lede">The HR Desk gives SMEs the HR structure of a big company — contracts, compliance, payroll support and people strategy — delivered fully remote, without the overhead of hiring a full HR department.</p>
+      <div class="btn-row">
+        <a class="btn-primary" href="#pricing">See affordable plans</a>
+        <a class="btn-ghost" href="#services">What we handle →</a>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <span class="tag">Why founders bring us in</span>
+      <div class="stat-row"><span class="label">Employment Act compliance</span><span class="value">Sorted</span></div>
+      <div class="stat-row"><span class="label">Average setup time</span><span class="value">10 days</span></div>
+      <div class="stat-row"><span class="label">Cost vs. in-house HR hire</span><span class="value">~70% less</span></div>
+      <div class="stat-row"><span class="label">Contracts &amp; policies</span><span class="value">Done for you</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="stitch"></div>
+
+<section class="trust">
+  <div class="wrap">
+    <span>Retail &amp; FMCG</span>
+    <span>Hospitality</span>
+    <span>Fintech Startups</span>
+    <span>Logistics</span>
+    <span>Professional Services</span>
+    <span>NGOs &amp; Foundations</span>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">What we handle</span>
+      <h2>Everything HR, minus the headcount.</h2>
+      <p>Most SMEs don't need a full HR department — they need the right pieces, done properly. Pick what your business needs today, and add more as you grow.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <span class="service-num">01</span>
+        <h3>Contracts &amp; Compliance</h3>
+        <p>Employment contracts, staff handbooks and policies drafted to meet the Employment Act, 2007 and current labour regulations.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-num">02</span>
+        <h3>Recruitment &amp; Onboarding</h3>
+        <p>Job descriptions, shortlisting, interviews and a smooth first 90 days — so new hires stick around and start contributing fast.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-num">03</span>
+        <h3>Payroll Oversight</h3>
+        <p>Payroll accuracy checks, statutory deductions (NSSF, SHIF, NITA, PAYE) and payslip structuring in partnership with your accountant.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-num">04</span>
+        <h3>Performance &amp; Culture</h3>
+        <p>Simple, usable performance review systems and culture-building practices sized for teams of 5 to 100 people.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-num">05</span>
+        <h3>Employee Relations</h3>
+        <p>Disciplinary processes, grievance handling and exits managed correctly — reducing legal exposure and protecting your reputation.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-num">06</span>
+        <h3>HR Strategy &amp; Structure</h3>
+        <p>Org design, role clarity and pay structures that scale cleanly as you move from 10 to 50 employees.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stitch sage"></div>
+
+<section id="process" class="section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">How it works</span>
+      <h2>A simple path from messy to managed.</h2>
+    </div>
+    <div class="process-list">
+      <div class="process-item">
+        <span class="p-num">01</span>
+        <div><h3>Free HR check-in</h3><p>A 30-minute call to understand your team size, gaps and biggest risk areas — no obligation.</p></div>
+      </div>
+      <div class="process-item">
+        <span class="p-num">02</span>
+        <div><h3>HR audit &amp; plan</h3><p>We review existing contracts, policies and payroll practices, then hand you a clear plan and quote.</p></div>
+      </div>
+      <div class="process-item">
+        <span class="p-num">03</span>
+        <div><h3>Build &amp; fix</h3><p>Contracts, handbooks and processes are drafted, corrected and rolled out to your team.</p></div>
+      </div>
+      <div class="process-item">
+        <span class="p-num">04</span>
+        <div><h3>Ongoing partnership</h3><p>Monthly or on-call support so HR stays handled as your headcount grows.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Pricing</span>
+      <h2>Built to be affordable for SME budgets.</h2>
+      <p>Transparent monthly retainers, no hidden fees. All plans are billed in KES and can be paused or upgraded as your team changes.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <h3>Essentials</h3>
+        <div class="price-tag">KES 15,000 <span>/ month</span></div>
+        <div class="price-sub">For teams of 1–10 people</div>
+        <ul>
+          <li>Employment contract templates</li>
+          <li>Statutory compliance check-in</li>
+          <li>1 policy document per quarter</li>
+          <li>Email &amp; WhatsApp support</li>
+        </ul>
+        <a class="price-cta" href="#contact">Start with Essentials</a>
+      </div>
+      <div class="price-card featured">
+        <h3>Growth</h3>
+        <div class="price-tag">KES 35,000 <span>/ month</span></div>
+        <div class="price-sub">For teams of 11–30 people</div>
+        <ul>
+          <li>Everything in Essentials</li>
+          <li>Recruitment support (2 roles/month)</li>
+          <li>Staff handbook &amp; onboarding kit</li>
+          <li>Payroll accuracy review</li>
+          <li>Monthly HR advisory call</li>
+        </ul>
+        <a class="price-cta" href="#contact">Start with Growth</a>
+      </div>
+      <div class="price-card">
+        <h3>Partner</h3>
+        <div class="price-tag">KES 60,000 <span>/ month</span></div>
+        <div class="price-sub">For teams of 30+ people</div>
+        <ul>
+          <li>Everything in Growth</li>
+          <li>Unlimited recruitment support</li>
+          <li>Employee relations &amp; exits handled</li>
+          <li>Performance system design</li>
+          <li>On-call HR director access</li>
+        </ul>
+        <a class="price-cta" href="#contact">Talk to us</a>
+      </div>
+    </div>
+    <div class="addon-note">Prefer a one-off? HR audits start at <strong>KES 20,000</strong>, single contract drafting at <strong>KES 3,500</strong>, and staff handbooks at <strong>KES 25,000</strong> — all deductible against your first retainer month.</div>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="wrap">
+    <div class="testimonial">
+      <span class="quote-mark">"</span>
+      <div>
+        <blockquote>The HR Desk set up our contracts and payroll process in two weeks, all remotely. We finally sleep well knowing we're compliant — at a fraction of what a full-time HR hire would cost us.</blockquote>
+        <cite>— Operations Lead, 22-person logistics company</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band" id="contact">
+  <div class="wrap">
+    <span class="eyebrow">Get started</span>
+    <h2>Let's stitch your HR together — properly, and affordably.</h2>
+    <p>Book a free 30-minute HR check-in. No pressure, just a clear view of where your business stands.</p>
+    <div class="btn-row" style="justify-content:center;">
+      <a class="btn-primary" href="mailto:thehrdesk00@gmail.com">Book your free check-in</a>
+      <a class="btn-ghost" href="tel:+254792523073">Call 0792 523 073</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">The HR Desk</div>
+        <p>Remote HR operations for small and growing businesses, serving SMEs across Kenya and beyond — led by Nolari.</p>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li>Contracts &amp; Compliance</li>
+          <li>Recruitment</li>
+          <li>Payroll Oversight</li>
+          <li>Employee Relations</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li>About</li>
+          <li>Pricing</li>
+          <li>Process</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>thehrdesk00@gmail.com</li>
+          <li>0792 523 073</li>
+          <li>Remote · Serving Kenya</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 The HR Desk. All rights reserved.</span>
+      <span>Guided by the Employment Act, 2007 &amp; Kenyan labour regulations.</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
